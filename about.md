@@ -4,10 +4,11 @@ title: 关于
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+CS渣硕，苦逼码农一枚，最近比较关心高并发、数据存储。
 
 You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
+{% include icon-github.html username="jeky:q
+ll" %} /
 [minima](https://github.com/jekyll/minima)
 
 You can find the source code for Jekyll at
