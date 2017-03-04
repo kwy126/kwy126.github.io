@@ -1,5 +1,5 @@
 
-##基于jekyll、github搭建个人博客
+## 基于jekyll、github搭建个人博客
 
 
 
@@ -7,7 +7,7 @@
 
 
 
-###创建github用户
+### 创建github用户
 
 
 
@@ -17,15 +17,15 @@
 
 
 
-###创建远程仓库
+### 创建远程仓库
 
 在创建github用户之后，需要创建远程仓库，比如我创建了kwy.gtihub.io仓库，如果我们想访问自己想要的域名，我们就需要注册域名。
 
-###绑定固定域名
+### 绑定固定域名
 
 目前有两个大厂提供域名申请，[阿里万维网](https://wanwang.aliyun.com/)，[腾讯域名](https://dnspod.qcloud.com/),我在腾讯域名注册一个帐号，不过实名认证和域名解析需要1天时间。
 
-###创建本地git库
+### 创建本地git库
 
 ```
 
@@ -43,7 +43,7 @@ bundle exec jekyll serve
 
 本地如果能访问127.0.0.1:4000说明keyll
 
-###初始化git库并提交到远程仓库
+### 初始化git库并提交到远程仓库
 
 ```
 
@@ -77,7 +77,7 @@ git commit -s -m "initialized"
 
 
 
-####下面介绍如何将本地仓库关联到远程github仓库
+#### 下面介绍如何将本地仓库关联到远程github仓库
 
 ```
 
@@ -93,7 +93,7 @@ git push -u origin master
 
 
 
-###参考连接
+### 参考连接
 
 1、[jekyll快速上手](https://jekyllrb.com/docs/quickstart/)
 
