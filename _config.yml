@@ -16,7 +16,7 @@
 title: 末路狂奔在路上
 email: kewy126@126.com
 description: > # this means to ignore newlines until "baseurl:"
-  这是我的第一个技术论坛，希望结交更多志同道合的人！！
+  这是我的技术博客，希望结交更多志同道合的人！！
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
