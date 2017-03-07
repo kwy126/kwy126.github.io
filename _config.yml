@@ -25,6 +25,7 @@ github_username:  kwy126
 # Build settings
 #markdown: kramdown
 markdown: RDiscount
+encoding: UTF-8
 theme: minima
 gems:
   - jekyll-feed
