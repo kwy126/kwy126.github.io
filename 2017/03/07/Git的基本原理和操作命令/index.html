@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>末路狂奔在路上</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git的基本原理和操作命令
+Git配置Git有三个级别的配置文件，分别是：
+
+版本库级别的配置文件：工程目录下，使用git config -e打开编辑
+
+全局配置文件：用户主目录下，使用git config -e –global打开编辑
+
+系统级别配置文件：/etc目录下，使用git config -e –system打开编辑
+
+
+下面介绍配置的一些命令
+
+可以使用命令git config use">
+<meta property="og:type" content="article">
+<meta property="og:title" content="末路狂奔在路上">
+<meta property="og:url" content="http://kwy126.cn/2017/03/07/Git的基本原理和操作命令/index.html">
+<meta property="og:site_name" content="末路狂奔在路上">
+<meta property="og:description" content="Git的基本原理和操作命令
+Git配置Git有三个级别的配置文件，分别是：
+
+版本库级别的配置文件：工程目录下，使用git config -e打开编辑
+
+全局配置文件：用户主目录下，使用git config -e –global打开编辑
+
+系统级别配置文件：/etc目录下，使用git config -e –system打开编辑
+
+
+下面介绍配置的一些命令
+
+可以使用命令git config use">
+<meta property="og:updated_time" content="2017-03-07T06:18:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="末路狂奔在路上">
+<meta name="twitter:description" content="Git的基本原理和操作命令
+Git配置Git有三个级别的配置文件，分别是：
+
+版本库级别的配置文件：工程目录下，使用git config -e打开编辑
+
+全局配置文件：用户主目录下，使用git config -e –global打开编辑
+
+系统级别配置文件：/etc目录下，使用git config -e –system打开编辑
+
+
+下面介绍配置的一些命令
+
+可以使用命令git config use">
+  
+    <link rel="alternate" href="/atom.xml" title="末路狂奔在路上" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">末路狂奔在路上</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kwy126.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Git的基本原理和操作命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/07/Git的基本原理和操作命令/" class="article-date">
+  <time datetime="2017-03-07T06:18:07.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Git的基本原理和操作命令"><a href="#Git的基本原理和操作命令" class="headerlink" title="Git的基本原理和操作命令"></a>Git的基本原理和操作命令</h2><hr>
+<h3 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h3><p>Git有三个级别的配置文件，分别是：</p>
+<ul>
+<li><p>版本库级别的配置文件：工程目录下，使用<strong>git config -e</strong>打开编辑</p>
+</li>
+<li><p>全局配置文件：用户主目录下，使用<strong>git config -e –global</strong>打开编辑</p>
+</li>
+<li><p>系统级别配置文件：/etc目录下，使用<strong>git config -e –system</strong>打开编辑</p>
+</li>
+</ul>
+<p>下面介绍配置的一些命令</p>
+<ul>
+<li><p>可以使用命令<strong>git config user.name</strong>获取用户名，通过命令<strong>git config user.email</strong>获取邮箱</p>
+</li>
+<li><p>使用命令 <strong>git config [–global] user.name kwy</strong> 设置用户名</p>
+</li>
+<li><p>使用命令<strong>git config [–global] user.email kewy126@126.com</strong> 设置邮箱</p>
+</li>
+</ul>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><h5 id="Git目录"><a href="#Git目录" class="headerlink" title="Git目录"></a>Git目录</h5><p>每一个本地库<strong>有且只有</strong>一个关于版本库相关信息的目录(.git,是一个隐藏目录)，这也是Git和SVN等集中式版本控制目录的区别，该目录包括以下内容：</p>
+<ul>
+<li><p>HEAD 表示git项目当前处于哪个分支</p>
+</li>
+<li><p>config 表示项目的配置信息</p>
+</li>
+<li><p>description 表示项目的描述信息</p>
+</li>
+<li><p>hooks 表示系统默认钩子脚本目录</p>
+</li>
+<li><p>index 索引文件</p>
+</li>
+<li><p>logs 各个refs的历史信息</p>
+</li>
+<li><p>objects 表示Git本地仓库的所有对象</p>
+</li>
+<li><p>refs 标识项目里的每个分支指向哪个提交(commit)</p>
+</li>
+</ul>
+<h2 id="Git的四个区域"><a href="#Git的四个区域" class="headerlink" title="Git的四个区域"></a>Git的四个区域</h2><p>SVN只有工作目录和远程仓库。</p>
+<ol>
+<li><p>working directory/workspace:工作目录，</p>
+</li>
+<li><p>index/stage:索引区/暂存区，commit命令是将暂存区的内容提交到本地版本库</p>
+</li>
+<li><p>local repository:</p>
+</li>
+<li><p>remote repositriy:远程仓库，</p>
+</li>
+</ol>
+<p>下面展示工作区、版本库中的暂存区和版本库之间的关系：</p>
+<ul>
+<li><p>图中左侧为工作区，右侧为版本库，在版本库中记为index是暂存区，记为master的表示代表master分支的目录树</p>
+</li>
+<li><p>图中可以看出HEAD实际是指向master分支的一个”游标”，<strong>所以图示的命令出现HEAD的地方可以用master替换</strong>。</p>
+</li>
+<li><p>图中的objects标识的区域为对象库，实际位于.git/bjects目录下。</p>
+</li>
+<li><p>当对工作区修改（或新增）的文件执行<strong>git add</strong>命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中。当执行<strong>git commit</strong>时，暂存区的目录树写到版本库（<strong>对象库</strong>）中，master分支会做相应的更新。即master最新指向的目录树就是提交时源暂存区的目录树</p>
+</li>
+<li><p>当执行<strong>git reset HEAD</strong>命令时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响</p>
+</li>
+<li><p>当执行<strong>git rm -cached</strong>命令时，会直接从暂存区删除文件，工作区则不做出改变</p>
+</li>
+<li><p>当执行**git checkout. 或者git checkout - 命令时，会用暂存区全部或指定的文件替换工作区的文件，这个操作很危险，会清除工作区中未添加到暂存区的改动</p>
+</li>
+<li><p>当执行**git checkout HEAD .或者git checkout HEAD命令时，会用HEAD执行的master分支中的全部或部分文件替换暂存区和工作区的文件，这个操作页很危险</p>
+</li>
+</ul>
+<h2 id="Git的文件状态"><a href="#Git的文件状态" class="headerlink" title="Git的文件状态"></a>Git的文件状态</h2><p>Git工作目录下的每一个文件都将处于下面的某个状态中：</p>
+<ul>
+<li><p>Untracked</p>
+</li>
+<li><p>Tracked</p>
+<ul>
+<li><p>Unmodified</p>
+</li>
+<li><p>Modified</p>
+</li>
+<li><p>Staged</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>我们可以用<strong>git status</strong>查看文件处于什么状态</p>
+<h2 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h2><ol>
+<li>初始化命令</li>
+</ol>
+<ul>
+<li><p>从远程clone仓库，例如执行：git clone <a href="https://github.com/kwy126/git-test.git" target="_blank" rel="external">https://github.com/kwy126/git-test.git</a></p>
+</li>
+<li><p>想在本地新建一个demo项目，并且要加入到git版本控制，就需要执行<strong>git init demo</strong></p>
+</li>
+<li><p>如果你有一个项目已经存在，并且想要加入到git版本控制，那么可以直接进入到这个项目的根目录，执行<strong>git init</strong>就可以了</p>
+</li>
+</ul>
+<ol>
+<li>提交到本地仓库命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git add xxx.md  </div><div class="line"></div><div class="line">git commit -s -m &quot;代码提交信息&quot;</div></pre></td></tr></table></figure>
+<p><strong>NOTES</strong></p>
+<ul>
+<li><p>git commit -s 中的-s含义为在提交说明的最后添加”Signed-off-by:”签名</p>
+</li>
+<li><p>如果对某个文件进行修改，也需要执行git add命令将文件提交到暂存区（而SVN等版本控制的add命令则不然）</p>
+</li>
+</ul>
+<p>   删除某个之后，commit</p>
+<pre><code>* 手动删除文件后，执行**git add -A .**
+
+* 不用手动删除，直接执行git rm xx.md
+
+撤销提交
+
+**git reset HEAD**
+</code></pre><ol>
+<li>分支命令</li>
+</ol>
+<ul>
+<li><p>Git分支地址</p>
+<p>  Git分支地址由<strong>主机名/分支名</strong>确定，可以通过<strong>git remote</strong>命令查看，比如：origin master,其中，origin就是远程主机名称。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git remote</div><div class="line"></div><div class="line">git remote -v</div></pre></td></tr></table></figure>
+<p><strong>notes</strong></p>
+<p>其实git remote命令是git版本库级配置文件中获取信息的</p>
+<ol>
+<li><p>切换分支</p>
+<p> Git因为有了本地仓库，因此我们才可以创建、合并、删除分支。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git branch ##查看当前属于哪个分支</div><div class="line"></div><div class="line">git branch hotfix #创建一个叫做hotfix的分支</div><div class="line"></div><div class="line">git checkout hotfix #切换到hotfix分支</div><div class="line"></div><div class="line">git status</div></pre></td></tr></table></figure>
+<p><strong>notes</strong></p>
+<ul>
+<li><p>当在主分支中创建readme.txt,然后切换到hotfix分支中，这是没错误的，因此此时hotfix库为空的(库中并没有readme.txt)，所以并不会和工作区中的readme.txt发生冲突</p>
+</li>
+<li><p>接着hotfix分支对readme.txt内容进行修改，并commit，然后checkout 到master分支，此时也不会出错</p>
+</li>
+<li><p>然后在master分支对readme.txt内容进行修改，但是没有进行commit（即使执行add命令），接着checkout到hotfix分支，此时会报错，因为，不同版本分支对应同一个工作区和暂存区，如果上一个版本都一个两个版本都有的内容进行修改，但是没有进行commit，然后，进行checkout操作，如果这个操作不报错的话，会导致上一个分支对内容修改的丢失</p>
+</li>
+</ul>
+<p>针对这个问题，有以下几种方法来解决：</p>
+<ul>
+<li><p>把本地变更（commit），再切换分支</p>
+</li>
+<li><p>把本地变更储藏（stash）起来，再切换分支，切换前的状态可以在checkout回来之后执行stash apply恢复</p>
+</li>
+<li><p>丢失本地变更，使用-f参数强制checkout（不建议这么做）</p>
+</li>
+</ul>
+<ol>
+<li><p>合并分支</p>
+<p> 合并有两种方式：</p>
+<ul>
+<li><p>merge：把两个分支的最新快照和以及两者最近的共同祖先进行三方合并，合并的结果是生成一个新的快照（并提交，如果没有冲突的话）</p>
+</li>
+<li><p>rebase ：提取目标分支引入的补丁和修改，然后在当前分支的基础上依次在应用一次</p>
+</li>
+</ul>
+</li>
+<li><p>远程分支</p>
+</li>
+</ol>
+<p>如果你要本地所有分支（不包括tags分支）变更都推送到远程仓库，那么可以使用<strong>–all参数</strong></p>
+<pre>git push <remote> --all</remote></pre>
+
+<p>如果要推送tags分支</p>
+<pre>git push <remote> --tags</remote></pre>
+
+<p>如果推送某一分支</p>
+<pre>git push <remote> <branch> </branch></remote></pre>
+
+
+
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><ol>
+<li><p><a href="http://blog.2baxb.me/archives/736" target="_blank" rel="external">秦大牛</a></p>
+</li>
+<li><p><a href="http://blog.arganzheng.me/posts/git-notes.html" target="_blank" rel="external">阿里某大牛</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kwy126.cn/2017/03/07/Git的基本原理和操作命令/" data-id="cizz5efap0001xv68gotnhafc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/07/深入浅出之intern函数/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/07/基于jekyll、github搭建个人博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/07/GC算法基础/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/深入浅出之intern函数/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/Git的基本原理和操作命令/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/基于jekyll、github搭建个人博客/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/markdown语法/">markdown语法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 keweiyang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -61,6 +61,368 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-GC算法基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/07/GC算法基础/" class="article-date">
+  <time datetime="2017-03-07T06:19:07.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>垃圾回收器会关注以下两个方面：</p>
+<ul>
+<li><p>找出所有存活的对象</p>
+</li>
+<li><p>清理所有的其他（废弃或无用）的对象</p>
+</li>
+</ul>
+<p>下面介绍如何找出存活对象</p>
+<h2 id="标记可达对象"><a href="#标记可达对象" class="headerlink" title="标记可达对象"></a>标记可达对象</h2><p>上图表示某个应用的<font color="red">对象图</font>，每个圈表示一个对象，其中，标记为蓝色的圈为存活对象，而标记为灰色的圈为废弃对象，即垃圾对象，图中的GC Roots对象（根对象），表示某些特殊的对象，包括：</p>
+<ul>
+<li><p>当前执行方法中的所有的本地变量及入参</p>
+</li>
+<li><p>活跃线程</p>
+</li>
+<li><p>已加载类的静态变量</p>
+</li>
+<li><p>JNI引用</p>
+</li>
+</ul>
+<p><strong>Notes</strong></p>
+<ul>
+<li><p>开始进行标记前，需要先暂停应用线程，否则如果对象图一直再变化的话是无法真正去遍历它的。暂停应用以便JVM可以尽情的收拾家务这种情况被称之为安全点（Safe Point），这会触发一次Stop The World（STW）。触发安全点的原因有很多，，但是最常见的是就是垃圾回收</p>
+</li>
+<li><p>暂停时间的长短并不取决于堆对象的多少也不是堆的大小，而是存活对象的多少。因此，调高堆的大小并不会影响到标记阶段的时间长短</p>
+</li>
+</ul>
+<h2 id="删除无用对象"><a href="#删除无用对象" class="headerlink" title="删除无用对象"></a>删除无用对象</h2><p>完成标记阶段之后，GC进入下一个阶段，删除不可达对象</p>
+<p>不同的GC算法在删除无用对象上的做法会有所不同，不过大致可以分为三类：清除(Sweeping),整理/压缩（Compacting）以及拷贝(Copying)。下面详细介绍这三种方法。</p>
+<h4 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h4><p>标记-清除算法是最简单的，值需要忽略这些对象就可以了。</p>
+<p>但是这个方法需要使用一个空闲列表来记录所有的空闲区域以及大小。对空闲列表的管理增加了分配对象的工作量。这种方法还有一个缺陷就是<font color="red">碎片问题</font>，即虽然空闲区域的大小总体来说是足够的，但是没有一个单一区域能够满足这次分配所需要的大小，因此本次分配还是会失败（在Java中就是一次OutOfMemoryError）</p>
+<h4 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h4><p>标记-整理算法修复了标记-清除算法的短板（碎片为题）：它将所有标记为存活对象移动到内存区域的开始位置。</p>
+<p>这种方法的缺点就是GC暂停时间会增长，因为你需要将所有的对象拷贝到一个新的地方，还得更新他们的引用地址。</p>
+<h3 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h3><p>标记-复制算法和标记-整理算法非常类似，他们都会将所有存活对象重新进行分配。却别在于重新分配的目标地址不同，复制算法的为了存活对象分配了另外的内存区域作为他们的新家。</p>
+<p>标记-复制算法的优点在于标记阶段和复制阶段可以同时进行。</p>
+<p>它的缺点是需要额外的空间来容纳所有的存活对象</p>
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><ol>
+<li><a href="http://it.deepinmind.com/gc/2016/07/09/garbage-collection-algorithms.html" target="_blank" rel="external">有浮</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kwy126.cn/2017/03/07/GC算法基础/" data-id="cizz5efal0000xv68vmlcs6mm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-深入浅出之intern函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/07/深入浅出之intern函数/" class="article-date">
+  <time datetime="2017-03-07T06:18:39.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p></p><p>String.intern()是一个Native方法，底层调用C++的StringTable::intern方法</p>
+<p><strong>NOTES</strong></p>
+<p>针对不同的jdk版本，实现的效果是不同的</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">String s1 = new StringBuilder().append(&quot;String&quot;).append(&quot;test&quot;).toString();</div><div class="line">System.out.println(s1 == s1.intern());</div><div class="line"></div><div class="line">String s2 = new StringBuilder().append(&quot;ja&quot;).append(&quot;va&quot;).toString();</div><div class="line">System.out.println(s2 == s2.intern());</div></pre></td></tr></table></figure>
+<ul>
+<li>在jdk7中，常量池也在堆中，s1在执行intern()方法，由于此时常量池中并没有”StringTest”字符串，因此，直接返回引用；而s2在执行intern()方法，由于”java”字符串比较常见，即已经被使用过，并且被存放在常量池中，那么<tt>s2==s2.intern()</tt>是true</li>
+</ul>
+<ul>
+<li>在jdk6中，堆和常量池是物理隔离的，执行intern方法，如果常量池中不存在该字符串，则虚拟机会复制该字符串，并返回引用。即使java字符串在常量池中已存在，但是由于堆和常量池是物理隔离的，两者的引用还是不同的,即<tt>s1==s1.intern()</tt>是false</li>
+</ul>
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><ol>
+<li><p><a href="http://www.jianshu.com/p/0d1c003d2ff5" target="_blank" rel="external">小狼</a></p>
+</li>
+<li><p><a href="http://tech.meituan.com/in_depth_understanding_string_intern.html" target="_blank" rel="external">美团</a></p>
+</li>
+<li><p><a href="http://calvin1978.blogcn.com/articles/string-intern.html" target="_blank" rel="external">白衣</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kwy126.cn/2017/03/07/深入浅出之intern函数/" data-id="cizz5efaw0004xv68llnx1tsg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Git的基本原理和操作命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/07/Git的基本原理和操作命令/" class="article-date">
+  <time datetime="2017-03-07T06:18:07.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Git的基本原理和操作命令"><a href="#Git的基本原理和操作命令" class="headerlink" title="Git的基本原理和操作命令"></a>Git的基本原理和操作命令</h2><hr>
+<h3 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h3><p>Git有三个级别的配置文件，分别是：</p>
+<ul>
+<li><p>版本库级别的配置文件：工程目录下，使用<strong>git config -e</strong>打开编辑</p>
+</li>
+<li><p>全局配置文件：用户主目录下，使用<strong>git config -e –global</strong>打开编辑</p>
+</li>
+<li><p>系统级别配置文件：/etc目录下，使用<strong>git config -e –system</strong>打开编辑</p>
+</li>
+</ul>
+<p>下面介绍配置的一些命令</p>
+<ul>
+<li><p>可以使用命令<strong>git config user.name</strong>获取用户名，通过命令<strong>git config user.email</strong>获取邮箱</p>
+</li>
+<li><p>使用命令 <strong>git config [–global] user.name kwy</strong> 设置用户名</p>
+</li>
+<li><p>使用命令<strong>git config [–global] user.email kewy126@126.com</strong> 设置邮箱</p>
+</li>
+</ul>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><h5 id="Git目录"><a href="#Git目录" class="headerlink" title="Git目录"></a>Git目录</h5><p>每一个本地库<strong>有且只有</strong>一个关于版本库相关信息的目录(.git,是一个隐藏目录)，这也是Git和SVN等集中式版本控制目录的区别，该目录包括以下内容：</p>
+<ul>
+<li><p>HEAD 表示git项目当前处于哪个分支</p>
+</li>
+<li><p>config 表示项目的配置信息</p>
+</li>
+<li><p>description 表示项目的描述信息</p>
+</li>
+<li><p>hooks 表示系统默认钩子脚本目录</p>
+</li>
+<li><p>index 索引文件</p>
+</li>
+<li><p>logs 各个refs的历史信息</p>
+</li>
+<li><p>objects 表示Git本地仓库的所有对象</p>
+</li>
+<li><p>refs 标识项目里的每个分支指向哪个提交(commit)</p>
+</li>
+</ul>
+<h2 id="Git的四个区域"><a href="#Git的四个区域" class="headerlink" title="Git的四个区域"></a>Git的四个区域</h2><p>SVN只有工作目录和远程仓库。</p>
+<ol>
+<li><p>working directory/workspace:工作目录，</p>
+</li>
+<li><p>index/stage:索引区/暂存区，commit命令是将暂存区的内容提交到本地版本库</p>
+</li>
+<li><p>local repository:</p>
+</li>
+<li><p>remote repositriy:远程仓库，</p>
+</li>
+</ol>
+<p>下面展示工作区、版本库中的暂存区和版本库之间的关系：</p>
+<ul>
+<li><p>图中左侧为工作区，右侧为版本库，在版本库中记为index是暂存区，记为master的表示代表master分支的目录树</p>
+</li>
+<li><p>图中可以看出HEAD实际是指向master分支的一个”游标”，<strong>所以图示的命令出现HEAD的地方可以用master替换</strong>。</p>
+</li>
+<li><p>图中的objects标识的区域为对象库，实际位于.git/bjects目录下。</p>
+</li>
+<li><p>当对工作区修改（或新增）的文件执行<strong>git add</strong>命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中。当执行<strong>git commit</strong>时，暂存区的目录树写到版本库（<strong>对象库</strong>）中，master分支会做相应的更新。即master最新指向的目录树就是提交时源暂存区的目录树</p>
+</li>
+<li><p>当执行<strong>git reset HEAD</strong>命令时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响</p>
+</li>
+<li><p>当执行<strong>git rm -cached</strong>命令时，会直接从暂存区删除文件，工作区则不做出改变</p>
+</li>
+<li><p>当执行**git checkout. 或者git checkout - 命令时，会用暂存区全部或指定的文件替换工作区的文件，这个操作很危险，会清除工作区中未添加到暂存区的改动</p>
+</li>
+<li><p>当执行**git checkout HEAD .或者git checkout HEAD命令时，会用HEAD执行的master分支中的全部或部分文件替换暂存区和工作区的文件，这个操作页很危险</p>
+</li>
+</ul>
+<h2 id="Git的文件状态"><a href="#Git的文件状态" class="headerlink" title="Git的文件状态"></a>Git的文件状态</h2><p>Git工作目录下的每一个文件都将处于下面的某个状态中：</p>
+<ul>
+<li><p>Untracked</p>
+</li>
+<li><p>Tracked</p>
+<ul>
+<li><p>Unmodified</p>
+</li>
+<li><p>Modified</p>
+</li>
+<li><p>Staged</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>我们可以用<strong>git status</strong>查看文件处于什么状态</p>
+<h2 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h2><ol>
+<li>初始化命令</li>
+</ol>
+<ul>
+<li><p>从远程clone仓库，例如执行：git clone <a href="https://github.com/kwy126/git-test.git" target="_blank" rel="external">https://github.com/kwy126/git-test.git</a></p>
+</li>
+<li><p>想在本地新建一个demo项目，并且要加入到git版本控制，就需要执行<strong>git init demo</strong></p>
+</li>
+<li><p>如果你有一个项目已经存在，并且想要加入到git版本控制，那么可以直接进入到这个项目的根目录，执行<strong>git init</strong>就可以了</p>
+</li>
+</ul>
+<ol>
+<li>提交到本地仓库命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git add xxx.md  </div><div class="line"></div><div class="line">git commit -s -m &quot;代码提交信息&quot;</div></pre></td></tr></table></figure>
+<p><strong>NOTES</strong></p>
+<ul>
+<li><p>git commit -s 中的-s含义为在提交说明的最后添加”Signed-off-by:”签名</p>
+</li>
+<li><p>如果对某个文件进行修改，也需要执行git add命令将文件提交到暂存区（而SVN等版本控制的add命令则不然）</p>
+</li>
+</ul>
+<p>   删除某个之后，commit</p>
+<pre><code>* 手动删除文件后，执行**git add -A .**
+
+* 不用手动删除，直接执行git rm xx.md
+
+撤销提交
+
+**git reset HEAD**
+</code></pre><ol>
+<li>分支命令</li>
+</ol>
+<ul>
+<li><p>Git分支地址</p>
+<p>  Git分支地址由<strong>主机名/分支名</strong>确定，可以通过<strong>git remote</strong>命令查看，比如：origin master,其中，origin就是远程主机名称。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git remote</div><div class="line"></div><div class="line">git remote -v</div></pre></td></tr></table></figure>
+<p><strong>notes</strong></p>
+<p>其实git remote命令是git版本库级配置文件中获取信息的</p>
+<ol>
+<li><p>切换分支</p>
+<p> Git因为有了本地仓库，因此我们才可以创建、合并、删除分支。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git branch ##查看当前属于哪个分支</div><div class="line"></div><div class="line">git branch hotfix #创建一个叫做hotfix的分支</div><div class="line"></div><div class="line">git checkout hotfix #切换到hotfix分支</div><div class="line"></div><div class="line">git status</div></pre></td></tr></table></figure>
+<p><strong>notes</strong></p>
+<ul>
+<li><p>当在主分支中创建readme.txt,然后切换到hotfix分支中，这是没错误的，因此此时hotfix库为空的(库中并没有readme.txt)，所以并不会和工作区中的readme.txt发生冲突</p>
+</li>
+<li><p>接着hotfix分支对readme.txt内容进行修改，并commit，然后checkout 到master分支，此时也不会出错</p>
+</li>
+<li><p>然后在master分支对readme.txt内容进行修改，但是没有进行commit（即使执行add命令），接着checkout到hotfix分支，此时会报错，因为，不同版本分支对应同一个工作区和暂存区，如果上一个版本都一个两个版本都有的内容进行修改，但是没有进行commit，然后，进行checkout操作，如果这个操作不报错的话，会导致上一个分支对内容修改的丢失</p>
+</li>
+</ul>
+<p>针对这个问题，有以下几种方法来解决：</p>
+<ul>
+<li><p>把本地变更（commit），再切换分支</p>
+</li>
+<li><p>把本地变更储藏（stash）起来，再切换分支，切换前的状态可以在checkout回来之后执行stash apply恢复</p>
+</li>
+<li><p>丢失本地变更，使用-f参数强制checkout（不建议这么做）</p>
+</li>
+</ul>
+<ol>
+<li><p>合并分支</p>
+<p> 合并有两种方式：</p>
+<ul>
+<li><p>merge：把两个分支的最新快照和以及两者最近的共同祖先进行三方合并，合并的结果是生成一个新的快照（并提交，如果没有冲突的话）</p>
+</li>
+<li><p>rebase ：提取目标分支引入的补丁和修改，然后在当前分支的基础上依次在应用一次</p>
+</li>
+</ul>
+</li>
+<li><p>远程分支</p>
+</li>
+</ol>
+<p>如果你要本地所有分支（不包括tags分支）变更都推送到远程仓库，那么可以使用<strong>–all参数</strong></p>
+<pre>git push <remote> --all</remote></pre>
+
+<p>如果要推送tags分支</p>
+<pre>git push <remote> --tags</remote></pre>
+
+<p>如果推送某一分支</p>
+<pre>git push <remote> <branch> </branch></remote></pre>
+
+
+
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><ol>
+<li><p><a href="http://blog.2baxb.me/archives/736" target="_blank" rel="external">秦大牛</a></p>
+</li>
+<li><p><a href="http://blog.arganzheng.me/posts/git-notes.html" target="_blank" rel="external">阿里某大牛</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kwy126.cn/2017/03/07/Git的基本原理和操作命令/" data-id="cizz5efap0001xv68gotnhafc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-基于jekyll、github搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/07/基于jekyll、github搭建个人博客/" class="article-date">
+  <time datetime="2017-03-07T06:17:33.000Z" itemprop="datePublished">2017-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##基于jekyll、github搭建个人博客</p>
+<hr>
+<p>###创建github用户</p>
+<p>这部分很简单，我就不做过多的介绍。</p>
+<p>###创建远程仓库</p>
+<p>在创建github用户之后，需要创建远程仓库，比如我创建了kwy.gtihub.io仓库，如果我们想访问自己想要的域名，我们就需要注册域名。</p>
+<p>###绑定固定域名</p>
+<p>目前有两个大厂提供域名申请，<a href="https://wanwang.aliyun.com/" target="_blank" rel="external">阿里万维网</a>，<a href="https://dnspod.qcloud.com/" target="_blank" rel="external">腾讯域名</a>,我在腾讯域名注册一个帐号，不过实名认证和域名解析需要1天时间。</p>
+<p>###创建本地git库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gem install jekyll bundler</div><div class="line"></div><div class="line">jekyll new kwy126.github.io</div><div class="line"></div><div class="line">cd kwy126.github.io</div><div class="line"></div><div class="line">bundle exec jekyll serve</div></pre></td></tr></table></figure>
+<p>注意：不能直接使用mkdir kwy126.github.io，mkdir指令后面不能接分隔符</p>
+<p>本地如果能访问127.0.0.1:4000说明keyll</p>
+<p>###初始化git库并提交到远程仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git init kwy126.github.io</div><div class="line"></div><div class="line">cd kwy126.github.io</div><div class="line"></div><div class="line">git commit -s -m &quot;initialized&quot;</div><div class="line"></div><div class="line">git add index.md</div><div class="line"></div><div class="line">git add Gemfile.lock</div><div class="line"></div><div class="line">git add Gemfile</div><div class="line"></div><div class="line">git add _config.yml</div><div class="line"></div><div class="line">git add _posts</div><div class="line"></div><div class="line">git add CNAME</div><div class="line"></div><div class="line">git commit -s -m &quot;initialized&quot;</div></pre></td></tr></table></figure>
+<p>注意：</p>
+<p>1.CNAME文件的作用是实现kwy126.github.io到域名(kwy126.cn)的关键</p>
+<p>2._posts文件下存放的是我们编写的markdown格式文件，即我们要发布的文章</p>
+<p>####下面介绍如何将本地仓库关联到远程github仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git remote add origin https://github.com/kwy126/kwy126.github.io.git</div><div class="line"></div><div class="line">git pull origin master ##验证下是否关联成功</div><div class="line"></div><div class="line">git push remote --all</div><div class="line"></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<p>###参考连接</p>
+<p>1、<a href="https://jekyllrb.com/docs/quickstart/" target="_blank" rel="external">jekyll快速上手</a></p>
+<p>2、<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">github pages 和jekyll上手</a></p>
+<p>3、<a href="http://blog.csdn.net/hanhailong726188/article/details/46738929" target="_blank" rel="external">本地代码上传到github</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kwy126.cn/2017/03/07/基于jekyll、github搭建个人博客/" data-id="cizz5efav0003xv68xgu41ixr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-markdown语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/07/markdown语法/" class="article-date">
@@ -123,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kwy126.cn/2017/03/07/markdown语法/" data-id="cizz5ay560000vx68q4v5vwik" class="article-share-link">Share</a>
+      <a data-url="http://kwy126.cn/2017/03/07/markdown语法/" data-id="cizz5efas0002xv68v655m1qa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,6 +523,22 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/07/GC算法基础/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/深入浅出之intern函数/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/Git的基本原理和操作命令/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/07/基于jekyll、github搭建个人博客/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2017/03/07/markdown语法/">markdown语法</a>
