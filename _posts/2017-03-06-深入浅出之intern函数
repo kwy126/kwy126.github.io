@@ -1,0 +1,41 @@
+ng.intern()是一个Native方法，底层调用C++的StringTable::intern方法
+
+**NOTES**
+
+针对不同的jdk版本，实现的效果是不同的
+
+
+
+## 实验
+
+```
+
+
+
+String s1 = new StringBuilder().append("String").append("test").toString();
+System.out.println(s1 == s1.intern());
+
+String s2 = new StringBuilder().append("ja").append("va").toString();
+System.out.println(s2 == s2.intern());
+
+
+```
+
+
+
+* 在jdk7中，常量池也在堆中，s1在执行intern()方法，由于此时常量池中并没有"StringTest"字符串，因此，直接返回引用；而s2在执行intern()方法，由于"java"字符串比较常见，即已经被使用过，并且被存放在常量池中，那么<tt>s2==s2.intern()</tt>是true
+
+
+
+
+
+* 在jdk6中，堆和常量池是物理隔离的，执行intern方法，如果常量池中不存在该字符串，则虚拟机会复制该字符串，并返回引用。即使java字符串在常量池中已存在，但是由于堆和常量池是物理隔离的，两者的引用还是不同的,即<tt>s1==s1.intern()</tt>是false
+
+
+## 参考连接
+
+1. [小狼](http://www.jianshu.com/p/0d1c003d2ff5)
+
+2. [美团](http://tech.meituan.com/in_depth_understanding_string_intern.html)
+
+3. [白衣](http://calvin1978.blogcn.com/articles/string-intern.html)
